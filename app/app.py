@@ -3,10 +3,11 @@ from fastai import *
 from fastai.vision import *
 from io import BytesIO
 
-classes = ['Abyssinian','Bengal','Birman','Bombay','British_Shorthair','Egyptian_Mau','Maine_Coon','Persian','Ragdoll','Russian_Blue','Siamese','Sphynx','american_bulldog','american_pit_bull_terrier','basset_hound','beagle','boxer','chihuahua','english_cocker_spaniel','english_setter','german_shorthaired','great_pyrenees','havanese','japanese_chin','keeshond','leonberger','miniature_pinscher','newfoundland','pomeranian','pug','saint_bernard','samoyed','scottish_terrier','shiba_inu','staffordshire_bull_terrier','wheaten_terrier','yorkshire_terrier']
+pets_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida.pkl','app/models/resnet50_revalida.pkl')
+pets_learn = load_learner(Path('app/models'), 'resnet50_revalida.pkl')
 
-model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida.pkl','app/models/resnet50_revalida.pkl')
-learn = load_learner(Path('app/models'), 'resnet50_revalida.pkl')
+nba_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida.pkl','app/models/resnet50_revalida_nba.pkl')
+nba_learn = load_learner(Path('app/models'), 'resnet50_revalida_nba.pkl')
 
 app = Flask(__name__)
 
@@ -23,8 +24,14 @@ def classify():
   if request.files:
     image = request.files["inputFile"]
 
+  print(request.files)
+
   image = open_image(BytesIO(image.read()))
-  prediction = learn.predict(image)[0]
+  if (request.form["classifierSelect"] == "pets"):
+    prediction = pets_learn.predict(image)[0]
+  elif (request.form["classifierSelect"] == "nba"):
+    prediction = nba_learn.predict(image)[0]
+
   print(prediction)
   return {'result': str(prediction)}
 

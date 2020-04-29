@@ -1,5 +1,6 @@
 const uploadImageForm = document.getElementById("upload-image-form");
 const inputFile = document.getElementById("input-file");
+const classifierSelect = document.getElementById("classifier-select");
 const uploadedImage = document.getElementById("uploaded-image");
 const resultText = document.getElementById("result-text");
 let imgURL = ""
@@ -16,6 +17,8 @@ uploadImageForm.addEventListener("submit", async (e) => {
 
   formData = new FormData()
   formData.append("inputFile", inputFile.files[0])
+  formData.append("classifierSelect", classifierSelect.value)
+  console.log(formData)
 
   let loc = window.location
 
