@@ -6,7 +6,7 @@ from io import BytesIO
 pets_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida.pkl','app/models/resnet50_revalida.pkl')
 pets_learn = load_learner(Path('app/models'), 'resnet50_revalida.pkl')
 
-nba_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida.pkl','app/models/resnet50_revalida_nba.pkl')
+nba_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida_nba.pkl','app/models/resnet50_revalida_nba.pkl')
 nba_learn = load_learner(Path('app/models'), 'resnet50_revalida_nba.pkl')
 
 app = Flask(__name__)
@@ -23,8 +23,6 @@ def classify():
   image = ""
   if request.files:
     image = request.files["inputFile"]
-
-  print(request.files)
 
   image = open_image(BytesIO(image.read()))
   if (request.form["classifierSelect"] == "pets"):
