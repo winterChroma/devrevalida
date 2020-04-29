@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "527971791012.dkr.ecr.ap-southeast-1.amazonaws.com/classyio/classyio:latest",
+    "Name": "527971791012.dkr.ecr.ap-southeast-1.amazonaws.com/classyio:latest",
     "Update": "true"
   },
   "Ports": [
