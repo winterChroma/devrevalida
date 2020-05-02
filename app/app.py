@@ -9,6 +9,9 @@ pets_learn = load_learner(Path('app/models'), 'resnet50_revalida.pkl')
 nba_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida_nba.pkl','app/models/resnet50_revalida_nba.pkl')
 nba_learn = load_learner(Path('app/models'), 'resnet50_revalida_nba.pkl')
 
+pinoy_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida_pinoy.pkl','app/models/resnet50_revalida_nba.pkl')
+pinoy_learn = load_learner(Path('app/models'), 'resnet50_revalida_pinoy.pkl')
+
 app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
@@ -29,6 +32,8 @@ def classify():
     prediction = pets_learn.predict(image)[0]
   elif (request.form["classifierSelect"] == "nba"):
     prediction = nba_learn.predict(image)[0]
+  elif (request.form["classifierSelect"] == "pinoy"):
+    prediction = pinoy_learn.predict(image)[0]
 
   print(prediction)
   return {'result': str(prediction)}
