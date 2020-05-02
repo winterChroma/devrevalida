@@ -9,7 +9,7 @@ pets_learn = load_learner(Path('app/models'), 'resnet50_revalida.pkl')
 nba_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida_nba.pkl','app/models/resnet50_revalida_nba.pkl')
 nba_learn = load_learner(Path('app/models'), 'resnet50_revalida_nba.pkl')
 
-pinoy_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida_pinoy.pkl','app/models/resnet50_revalida_nba.pkl')
+pinoy_model_path = download_url('https://revalida-test.s3-ap-southeast-1.amazonaws.com/resnet50_revalida_pinoy.pkl','app/models/resnet50_revalida_pinoy.pkl')
 pinoy_learn = load_learner(Path('app/models'), 'resnet50_revalida_pinoy.pkl')
 
 app = Flask(__name__)
